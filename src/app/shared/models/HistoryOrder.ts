@@ -1,6 +1,6 @@
 export class HistoryOrder {
-    Id!: number;
-    Location!: string;
-    StatusDate!: string;
-    Status!: string;
+    id!: number;
+    location!: string;
+    statusDate!: string;
+    status!: string;
 }

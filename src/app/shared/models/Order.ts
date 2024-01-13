@@ -1,17 +1,17 @@
 import { HistoryOrder } from "./HistoryOrder";
 
 export class Order{
-    Ammount!: number;
-    Id!: number;
-    Description!: string;
-    PinCode!: string;
-    Awb!: string;
-    CustomerName!: string;
-    PhoneNumber!: string;
-    Email!: string;
-    Address!: string;
-    City!: string;
-    PaymentMethod!: string;
-    ZipCode!: string;
-    HistoryOrders!: HistoryOrder[];
+    ammount!: number;
+    id!: number;
+    description!: string;
+    pinCode!: string;
+    awb!: string;
+    customerName!: string;
+    phoneNumber!: string;
+    email!: string;
+    address!: string;
+    city!: string;
+    paymentMethod!: string;
+    zipCode!: string;
+    historyOrders!: HistoryOrder[];
 }

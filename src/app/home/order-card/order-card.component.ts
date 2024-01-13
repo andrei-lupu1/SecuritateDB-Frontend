@@ -4,15 +4,19 @@ import { Order } from '../../shared/models/Order';
 import { CourierService } from '../../services/courier.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatButtonModule } from '@angular/material/button';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTableModule} from '@angular/material/table';
+
 @Component({
   selector: 'app-order-card',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule],
+  imports: [MatCardModule, MatButtonModule, MatTableModule],
   templateUrl: './order-card.component.html',
   styleUrl: './order-card.component.scss'
 })
 export class OrderCardComponent {
   @Input() order!: Order;
+  displayedColumns: string[] = ['status', 'statusDate', 'location'];
 
   constructor(private courierService: CourierService,
               private toastrService: ToastrService) { }

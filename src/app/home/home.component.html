@@ -1,7 +1,7 @@
 @if (isLoggedIn){
   <div class="container center">
-    <h2>Orders for today: {{orders.length}}</h2>
     @if(this.orders){
+      <h2>Orders for today: {{orders.length}}</h2>
         @for (order of orders; track order) {
             <app-order-card [order]="order"></app-order-card>
         }

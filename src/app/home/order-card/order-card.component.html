@@ -1,21 +1,36 @@
 <div class="card">
     <mat-card>
-        <mat-card-title>Customer: {{order.CustomerName}} | Tel: {{order.PhoneNumber}} | Email: {{order.Email}}</mat-card-title>
-        <mat-card-subtitle>Address: {{order.Address}} ZIP: {{order.ZipCode}}</mat-card-subtitle>
+        <mat-card-title>Customer: {{order.customerName}} | Tel: {{order.phoneNumber}} | Email: {{order.email}}</mat-card-title>
+        <mat-card-subtitle>Address: {{order.address}} ZIP: {{order.zipCode}}</mat-card-subtitle>
         <mat-card-content>
-            <p>Ammount: {{order.Ammount}}</p>
-            <p>AWB: {{order.Awb}}</p>
-            <p>PIN CODE: {{order.PinCode}}</p>
+            <p>Ammount: {{order.ammount}}</p>
+            <p>AWB: {{order.awb}}</p>
+            <p>PIN CODE: {{order.pinCode}}</p>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="markOrderAsDone(order.Id)">Mark order as done</button>
+            <button mat-raised-button color="primary" (click)="markOrderAsDone(order.id)">Mark order as done</button>
         </mat-card-actions>
+        <mat-card-footer>
+            <table mat-table [dataSource]="order.historyOrders" class="mat-elevation-z8">
+                <ng-container matColumnDef="status">
+                  <th mat-header-cell *matHeaderCellDef> Status </th>
+                  <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="statusDate">
+                  <th mat-header-cell *matHeaderCellDef> Status Date </th>
+                  <td mat-cell *matCellDef="let element"> {{element.statusDate}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="location">
+                  <th mat-header-cell *matHeaderCellDef> Location </th>
+                  <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+
+        </mat-card-footer>
       </mat-card>
-      @for(historyOrder of order.HistoryOrders; track historyOrder){
-        <div class="history">
-          <p>{{historyOrder.Status}}</p>
-          <p>{{historyOrder.StatusDate}}</p>
-          <p>{{historyOrder.Location}}</p>
-        </div>
-      }
 </div>
