@@ -16,7 +16,6 @@
                     <mat-error>Name is required</mat-error>
                 }
             </mat-form-field>
-            <br>
             <mat-form-field class="input" appearance="outline">
                 <mat-label>Password</mat-label>
                 <input required matInput type="password" formControlName="Password">
@@ -34,7 +33,6 @@
             @if(this.registerForm.hasError('PasswordNoMatch')){
                 <mat-error>Passwords do not match</mat-error>
             }
-            <br>
             <mat-form-field class="input" appearance="outline">
                 <mat-label>Email</mat-label>
                 <input required matInput type="email" formControlName="Email">
