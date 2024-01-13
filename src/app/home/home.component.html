@@ -1,0 +1,23 @@
+@if (isLoggedIn){
+  <div class="container center">
+    <h2>Orders for today: {{orders.length}}</h2>
+    @if(this.orders){
+        @for (order of orders; track order) {
+            <app-order-card [order]="order"></app-order-card>
+        }
+    }
+    @if(this.vehicles && !isWorking){
+        <mat-form-field>
+            <mat-label>Choose a van</mat-label>
+            <mat-select required [formControl]="this.selectedVehicleId">
+              @for (vehicle of vehicles; track vehicle) {
+                <mat-option [value]="vehicle.id">{{vehicle.numbeR_PLATE}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          @if (!isWorking){
+            <button class="workbutton" (click)="startWorking()" mat-raised-button color="primary">Start working</button>
+          }
+    }
+</div>
+}

@@ -1,0 +1,21 @@
+<div class="card">
+    <mat-card>
+        <mat-card-title>Customer: {{order.CustomerName}} | Tel: {{order.PhoneNumber}} | Email: {{order.Email}}</mat-card-title>
+        <mat-card-subtitle>Address: {{order.Address}} ZIP: {{order.ZipCode}}</mat-card-subtitle>
+        <mat-card-content>
+            <p>Ammount: {{order.Ammount}}</p>
+            <p>AWB: {{order.Awb}}</p>
+            <p>PIN CODE: {{order.PinCode}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="markOrderAsDone(order.Id)">Mark order as done</button>
+        </mat-card-actions>
+      </mat-card>
+      @for(historyOrder of order.HistoryOrders; track historyOrder){
+        <div class="history">
+          <p>{{historyOrder.Status}}</p>
+          <p>{{historyOrder.StatusDate}}</p>
+          <p>{{historyOrder.Location}}</p>
+        </div>
+      }
+</div>

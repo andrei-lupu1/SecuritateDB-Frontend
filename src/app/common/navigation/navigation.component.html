@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+    <span>Courier App</span>
+    <span class="spacer"></span>
+    @if(!isLoggedIn){
+      <div>
+        <button mat-button [routerLink]="['/login']">
+          <mat-icon>lock_open</mat-icon>
+          Login
+        </button>
+        <button mat-button [routerLink]="['/register']">
+          <mat-icon>person_add</mat-icon>
+          Register
+        </button>
+      </div>
+    }
+    @else{
+      <p class="navbar-text">Welcome {{this.tokenData.Username}}</p>
+      <button class="navbar-text" mat-button (click)="Logout()"><mat-icon>exit_to_app</mat-icon>Logout</button>
+    }
+  </mat-toolbar>

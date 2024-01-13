@@ -1,0 +1,55 @@
+<div class="container center formfield">
+    <h2>Register</h2>
+    <div>
+        <form [formGroup]="registerForm">
+            <mat-form-field class="input" appearance="outline">
+                <mat-label>Username</mat-label>
+                <input required matInput formControlName="Username">
+                @if(this.Username?.hasError('required')){
+                    <mat-error>Username is required</mat-error>
+                }
+            </mat-form-field>
+            <mat-form-field class="input" appearance="outline">
+                <mat-label>Name</mat-label>
+                <input required matInput formControlName="Name">
+                @if(this.Name?.hasError('required')){
+                    <mat-error>Name is required</mat-error>
+                }
+            </mat-form-field>
+            <br>
+            <mat-form-field class="input" appearance="outline">
+                <mat-label>Password</mat-label>
+                <input required matInput type="password" formControlName="Password">
+                @if(this.Password?.hasError('required')){
+                    <mat-error>Password is required</mat-error>
+                }
+            </mat-form-field>
+            <mat-form-field class="input" appearance="outline">
+                <mat-label>Confirm Password</mat-label>
+                <input required matInput type="password" formControlName="ConfirmPassword">
+                @if(this.Email?.hasError('required')){
+                    <mat-error>ConfirmPassword is required</mat-error>
+                }
+            </mat-form-field>
+            @if(this.registerForm.hasError('PasswordNoMatch')){
+                <mat-error>Passwords do not match</mat-error>
+            }
+            <br>
+            <mat-form-field class="input" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input required matInput type="email" formControlName="Email">
+                @if(this.Email?.hasError('required')){
+                    <mat-error>Email is required</mat-error>
+                }
+            </mat-form-field>
+            <mat-form-field class="input" appearance="outline">
+                <mat-label>Phone number</mat-label>
+                <input required matInput formControlName="PhoneNumber">
+                @if(this.PhoneNumber?.hasError('required')){
+                    <mat-error>PhoneNumber is required</mat-error>
+                }
+            </mat-form-field>
+        </form>
+        <button mat-raised-button color="primary" (click)="register()">Register</button>
+    </div>
+</div>
