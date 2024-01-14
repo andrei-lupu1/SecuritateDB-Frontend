@@ -13,7 +13,8 @@ export class CourierService {
   private readonly getAvailableVehiclesUrl: string = `/Courier/GetAvailableVehicles`;
   private readonly startWorkingUrl: string = `/Courier/StartWorking?vehicleId=`;
   private readonly markOrderAsDoneUrl: string = `/Courier/MarkOrderAsDone?orderId=`;
-  private readonly isCourierWorking: string = `/Courier/IsCourierWorking`
+  private readonly isCourierWorkingUrl: string = `/Courier/IsCourierWorking`
+  private readonly courierFinishWorkingUrl: string = `/Courier/CourierFinishWorking`
 
   constructor(private _http: HttpClient) { }
 
@@ -34,6 +35,10 @@ export class CourierService {
   }
 
   IsCourierWorking(){
-    return this._http.get<ApiResponse>(`${this.baseUrl}${this.isCourierWorking}`);
+    return this._http.get<ApiResponse>(`${this.baseUrl}${this.isCourierWorkingUrl}`);
+  }
+
+  CourierFinishWorking(){
+    return this._http.get<ApiResponse>(`${this.baseUrl}${this.courierFinishWorkingUrl}`);
   }
 }

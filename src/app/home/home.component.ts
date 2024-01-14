@@ -132,6 +132,17 @@ export class HomeComponent implements OnInit{
       });
     }
   }
+
+  courierFinishWorking(){
+    this.courierService.CourierFinishWorking().subscribe({
+      next: (response: ApiResponse) => {
+        if(response.succes){
+          this.toastrService.success(response.message);
+        }
+      }
+    });
+  }
+
   markOrderAsDone(orderId: number){
     this.courierService.MarkOrderAsDone(orderId).subscribe({
       next: (response: ApiResponse) => {

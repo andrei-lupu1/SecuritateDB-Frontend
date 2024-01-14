@@ -19,6 +19,9 @@
             <button class="workbutton" (click)="startWorking()" mat-raised-button color="primary">Start working</button>
       }
     }
+    @else if(isWorking){
+      <button (click)="courierFinishWorking()" mat-raised-button color="primary">Finish working</button>
+    }
     @else if (this.role == 3) {
       @if(this.orders){
         <div class="flex-row">
