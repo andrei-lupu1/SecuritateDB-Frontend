@@ -10,6 +10,7 @@ import { Order } from '../shared/models/Order';
 import { OrderCardComponent } from './order-card/order-card.component';
 import { MatButtonModule } from '@angular/material/button';
 import { ToastrService } from 'ngx-toastr';
+import { CustomerService } from '../services/customer.service';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit{
   constructor(private accountService: AccountService,
               private userService: UserService,
               private courierService: CourierService,
+              private customerService: CustomerService,
               private toastrService: ToastrService) {}
 
   role: number = 0;
@@ -48,6 +50,9 @@ export class HomeComponent implements OnInit{
                 this.getAvailableVehicles();
                 this.isCourierWorking();
               }
+              else if(this.role == 3){
+                this.getCustomerOrders();
+              }
             }
           });
         }
@@ -57,6 +62,14 @@ export class HomeComponent implements OnInit{
 
   getOrders(){
     this.courierService.GetOrdersForCourier().subscribe({
+      next: (response: ApiResponse) => {
+        this.orders = response.result as Order[];
+      }
+    });
+  }
+
+  getCustomerOrders(){
+    this.customerService.getOrdersForCustomer().subscribe({
       next: (response: ApiResponse) => {
         this.orders = response.result as Order[];
       }

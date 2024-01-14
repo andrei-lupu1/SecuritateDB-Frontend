@@ -1,21 +1,34 @@
 @if (isLoggedIn){
   <div class="container center">
-    @if(this.orders){
-      <h2>Orders for today: {{orders.length}}</h2>
-        @for (order of orders; track order) {
-            <app-order-card [order]="order" [isWorking]="isWorking" (orderDoneOutput)="markOrderAsDone($event)"></app-order-card>
-        }
+    @if(this.role == 2){
+      @if(this.orders){
+        <h2>Orders for today: {{orders.length}}</h2>
+          @for (order of orders; track order) {
+              <app-order-card [order]="order" [isWorking]="isWorking" (orderDoneOutput)="markOrderAsDone($event)"></app-order-card>
+          }
+      }
+      @if(this.vehicles && !isWorking){
+          <mat-form-field>
+              <mat-label>Choose a van</mat-label>
+              <mat-select required [formControl]="this.selectedVehicleId">
+                @for (vehicle of vehicles; track vehicle) {
+                  <mat-option [value]="vehicle.id">{{vehicle.numbeR_PLATE}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            <button class="workbutton" (click)="startWorking()" mat-raised-button color="primary">Start working</button>
+      }
     }
-    @if(this.vehicles && !isWorking){
-        <mat-form-field>
-            <mat-label>Choose a van</mat-label>
-            <mat-select required [formControl]="this.selectedVehicleId">
-              @for (vehicle of vehicles; track vehicle) {
-                <mat-option [value]="vehicle.id">{{vehicle.numbeR_PLATE}}</mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-          <button class="workbutton" (click)="startWorking()" mat-raised-button color="primary">Start working</button>
+    @else if (this.role == 3) {
+      @if(this.orders){
+        <div class="flex-row">
+          <h2>Your orders: {{orders.length}}</h2>
+          <button mat-raised-button color="primary">Add an order</button>
+        </div>
+          @for (order of orders; track order) {
+              <app-order-card [order]="order" [isWorking]="false"></app-order-card>
+          }
+      }
     }
 </div>
 }
