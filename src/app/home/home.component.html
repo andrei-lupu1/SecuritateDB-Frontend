@@ -23,7 +23,7 @@
       @if(this.orders){
         <div class="flex-row">
           <h2>Your orders: {{orders.length}}</h2>
-          <button mat-raised-button color="primary">Add an order</button>
+          <button mat-raised-button color="primary" (click)="openAddOrderDialog()">Add an order</button>
         </div>
           @for (order of orders; track order) {
               <app-order-card [order]="order" [isWorking]="false"></app-order-card>

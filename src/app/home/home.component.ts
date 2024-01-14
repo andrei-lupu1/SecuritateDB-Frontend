@@ -11,11 +11,13 @@ import { OrderCardComponent } from './order-card/order-card.component';
 import { MatButtonModule } from '@angular/material/button';
 import { ToastrService } from 'ngx-toastr';
 import { CustomerService } from '../services/customer.service';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { AddOrderDialogComponent } from './add-order-dialog/add-order-dialog.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MatSelectModule, OrderCardComponent, MatButtonModule, ReactiveFormsModule],
+  imports: [MatSelectModule, OrderCardComponent, MatButtonModule, ReactiveFormsModule, MatDialogModule, AddOrderDialogComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -24,7 +26,8 @@ export class HomeComponent implements OnInit{
               private userService: UserService,
               private courierService: CourierService,
               private customerService: CustomerService,
-              private toastrService: ToastrService) {}
+              private toastrService: ToastrService,
+              public dialog: MatDialog) {}
 
   role: number = 0;
   vehicles!: Vehicle[];
@@ -56,6 +59,27 @@ export class HomeComponent implements OnInit{
             }
           });
         }
+      }
+    });
+  }
+
+  openAddOrderDialog(): void{
+    const dialogRef = this.dialog.open(AddOrderDialogComponent, {
+      width: '900px',
+      data: {order: new Order(),
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result != null){
+        this.customerService.addOrder(result as Order).subscribe({
+          next: (response: ApiResponse) => {
+            if(response.succes){
+              this.toastrService.success(response.message);
+              this.getCustomerOrders();
+            }
+          }
+        });
       }
     });
   }
