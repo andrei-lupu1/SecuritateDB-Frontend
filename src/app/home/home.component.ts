@@ -116,17 +116,20 @@ export class HomeComponent implements OnInit{
     });
   }
 
-  startWorking(){
+  courierStartWorking(){
     if(!this.selectedVehicleId.value){
       this.selectedVehicleId.markAsTouched();
       this.toastrService.error("Please select a vehicle");
     }
     else{
-      this.courierService.StartWorking(this.selectedVehicleId.value).subscribe({
+      this.courierService.CourierStartWorking(this.selectedVehicleId.value).subscribe({
         next: (response: ApiResponse) => {
           if(response.succes){
             this.toastrService.success(response.message);
             this.isWorking = true;
+          }
+          else{
+            this.toastrService.error(response.message);
           }
         }
       });
