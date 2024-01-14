@@ -1,3 +1,9 @@
+@if(!isLoggedIn){
+  <div class="container center">
+    <h1>Welcome to Courier App!</h1>
+    <h2>Please login to proceed.</h2>
+  </div>
+}
 @if (isLoggedIn){
   <div class="container center">
     @if(this.role == 2){
