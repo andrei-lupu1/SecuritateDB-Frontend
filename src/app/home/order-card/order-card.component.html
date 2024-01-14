@@ -7,9 +7,11 @@
             <p>AWB: {{order.awb}}</p>
             <p>PIN CODE: {{order.pinCode}}</p>
         </mat-card-content>
-        <mat-card-actions>
+        @if(isWorking){
+          <mat-card-actions>
             <button mat-raised-button color="primary" (click)="markOrderAsDone(order.id)">Mark order as done</button>
         </mat-card-actions>
+        }
         <mat-card-footer>
             <table mat-table [dataSource]="order.historyOrders" class="mat-elevation-z8">
                 <ng-container matColumnDef="status">

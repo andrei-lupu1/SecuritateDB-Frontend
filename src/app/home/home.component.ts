@@ -46,6 +46,7 @@ export class HomeComponent implements OnInit{
               if(this.role == 2){
                 this.getOrders();
                 this.getAvailableVehicles();
+                this.isCourierWorking();
               }
             }
           });
@@ -58,7 +59,6 @@ export class HomeComponent implements OnInit{
     this.courierService.GetOrdersForCourier().subscribe({
       next: (response: ApiResponse) => {
         this.orders = response.result as Order[];
-        console.log(this.orders)
       }
     });
   }
@@ -67,6 +67,14 @@ export class HomeComponent implements OnInit{
     this.courierService.GetAvailableVehicles().subscribe({
       next: (response: ApiResponse) => {
         this.vehicles = response.result as Vehicle[];
+      }
+    });
+  }
+
+  isCourierWorking(){
+    this.courierService.IsCourierWorking().subscribe({
+      next: (response: ApiResponse) => {
+        this.isWorking = response.result;
       }
     });
   }
@@ -86,6 +94,16 @@ export class HomeComponent implements OnInit{
         }
       });
     }
+  }
+  markOrderAsDone(orderId: number){
+    this.courierService.MarkOrderAsDone(orderId).subscribe({
+      next: (response: ApiResponse) => {
+        if(response.succes){
+          this.toastrService.success(response.message);
+          this.getOrders();
+        }
+      }
+    });
   }
 
 }
