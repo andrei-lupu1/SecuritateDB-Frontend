@@ -13,7 +13,7 @@
               <app-order-card [order]="order" [isWorking]="isWorking" (orderDoneOutput)="markOrderAsDone($event)"></app-order-card>
           }
       }
-      @if(this.vehicles && !isWorking){
+      @if(this.vehicles && !isWorking && this.orders.length > 1){
           <mat-form-field>
               <mat-label>Choose a van</mat-label>
               <mat-select required [formControl]="this.selectedVehicleId">
